@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLOCKIFY - Premium Digital Marketplace</title>
+    <title>BLOCKIFY - Next-Gen Elite Marketplace</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,19 +12,22 @@
                 extend: {
                     colors: {
                         dark: {
-                            900: '#0b0f19',
-                            800: '#111827',
-                            700: '#1f2937',
+                            900: '#070913',
+                            800: '#0f172a',
+                            700: '#1e293b',
                         },
                         brand: {
-                            primary: '#5865F2',
-                            glow: '#7289da',
-                            accent: '#10B981'
+                            primary: '#6366f1',
+                            glow: '#818cf8',
+                            accent: '#10b981',
+                            pink: '#ec4899',
+                            cyan: '#06b6d4'
                         }
                     },
                     boxShadow: {
-                        'neon': '0 0 25px rgba(88, 101, 242, 0.4)',
-                        'neon-hover': '0 0 35px rgba(88, 101, 242, 0.7)',
+                        'neon': '0 0 35px rgba(99, 102, 241, 0.5)',
+                        'neon-pink': '0 0 35px rgba(236, 72, 153, 0.5)',
+                        'neon-cyan': '0 0 35px rgba(6, 182, 212, 0.5)',
                     }
                 }
             }
@@ -33,84 +36,88 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #0b0f19;
-            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #070913;
+            color: #f8fafc;
+            overflow-x: hidden;
         }
         .glassmorphism {
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .glassmorphism-card {
-            background: rgba(31, 41, 55, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+        .glass-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .glassmorphism-card:hover {
-            border-color: rgba(88, 101, 242, 0.4);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(88, 101, 242, 0.3);
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.6);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.4);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 30px rgba(88, 101, 242, 0.8);
-            }
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 0 45px rgba(99, 102, 241, 0.8); }
         }
-        .animate-pulse-glow {
-            animation: pulse-glow 2.5s infinite;
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .animate-glow {
+            animation: pulse-glow 3s infinite;
         }
     </style>
 </head>
-<body class="bg-dark-900 text-gray-100 antialiased selection:bg-brand-primary selection:text-white">
+<body class="selection:bg-brand-primary selection:text-white">
+
+    <!-- Glowing Background Elements -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-brand-pink/15 rounded-full blur-[120px] pointer-events-none"></div>
 
     <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 glassmorphism border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Logo -->
+    <header class="fixed top-0 left-0 right-0 z-50 glassmorphism border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" onclick="showSection('home')" class="flex items-center space-x-3 group cursor-pointer">
-                <div class="w-10 h-10 rounded-xl bg-brand-primary flex items-center justify-center shadow-neon group-hover:scale-105 transition-transform">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-primary to-brand-cyan flex items-center justify-center shadow-neon group-hover:rotate-12 transition-transform duration-300">
                     <i class="fa-solid fa-cube text-white text-xl"></i>
                 </div>
-                <span class="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-white via-indigo-200 to-brand-primary bg-clip-text text-transparent">
+                <span class="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-white via-indigo-200 to-brand-glow bg-clip-text text-transparent">
                     BLOCKIFY
                 </span>
             </a>
 
-            <!-- Navigation Links -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="#" onclick="showSection('home'); return false;" class="text-gray-300 hover:text-brand-primary transition-colors">Home</a>
-                <a href="#products" onclick="showSection('home');" class="text-gray-300 hover:text-brand-primary transition-colors">Categories</a>
-                <a href="#why-us" onclick="showSection('home');" class="text-gray-300 hover:text-brand-primary transition-colors">Reviews & Trust</a>
+                <a href="#" onclick="showSection('home'); return false;" class="text-gray-300 hover:text-brand-glow transition-colors">Home</a>
+                <a href="#products" onclick="showSection('home');" class="text-gray-300 hover:text-brand-glow transition-colors">Categories</a>
+                <a href="#why-us" onclick="showSection('home');" class="text-gray-300 hover:text-brand-glow transition-colors">Trust & Reviews</a>
             </nav>
 
-            <!-- CTA Button -->
             <div class="flex items-center space-x-4">
-                <a href="https://discord.gg" target="_blank" class="hidden sm:inline-flex items-center space-x-2 bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-neon animate-pulse-glow">
+                <a href="https://discord.gg" target="_blank" class="hidden sm:inline-flex items-center space-x-2 bg-gradient-to-r from-brand-primary to-brand-pink hover:opacity-95 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-neon animate-glow">
                     <i class="fa-brands fa-discord text-lg"></i>
                     <span>Join Discord</span>
                 </a>
-                <!-- Mobile Menu Button -->
                 <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
-                    <i class="fa-solid fa-bars text-2xl"></i>
+                    <i class="fa-solid fa-bars-staggered text-2xl"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden glassmorphism border-t border-gray-800 px-4 pt-4 pb-6 space-y-3">
-            <a href="#" onclick="showSection('home'); mobileMenu.classList.add('hidden');" class="block text-gray-300 hover:text-brand-primary font-medium py-2">Home</a>
-            <a href="#products" onclick="showSection('home'); mobileMenu.classList.add('hidden');" class="block text-gray-300 hover:text-brand-primary font-medium py-2">Categories</a>
-            <a href="#why-us" onclick="showSection('home'); mobileMenu.classList.add('hidden');" class="block text-gray-300 hover:text-brand-primary font-medium py-2">Reviews & Trust</a>
-            <a href="https://discord.gg" target="_blank" class="flex items-center justify-center space-x-2 w-full bg-brand-primary text-white py-3 rounded-xl font-semibold shadow-neon">
+        <div id="mobile-menu" class="hidden md:hidden glassmorphism border-t border-white/5 px-6 pt-4 pb-6 space-y-3">
+            <a href="#" onclick="showSection('home'); mobileMenu.classList.add('hidden');" class="block text-gray-300 hover:text-brand-glow font-medium py-2">Home</a>
+            <a href="#products" onclick="showSection('home'); mobileMenu.classList.add('hidden');" class="block text-gray-300 hover:text-brand-glow font-medium py-2">Categories</a>
+            <a href="#why-us" onclick="showSection('home'); mobileMenu.classList.add('hidden');" class="block text-gray-300 hover:text-brand-glow font-medium py-2">Trust & Reviews</a>
+            <a href="https://discord.gg" target="_blank" class="flex items-center justify-center space-x-2 w-full bg-gradient-to-r from-brand-primary to-brand-pink text-white py-3 rounded-xl font-bold shadow-neon">
                 <i class="fa-brands fa-discord text-lg"></i>
                 <span>Join Discord</span>
             </a>
@@ -120,118 +127,121 @@
     <!-- MAIN HOMEPAGE VIEW -->
     <div id="view-home">
         <!-- Hero Section -->
-        <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-primary/20 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                <div class="inline-flex items-center space-x-2 bg-dark-800/80 border border-gray-700/60 px-4 py-2 rounded-full mb-8 shadow-inner">
-                    <span class="flex h-2.5 w-2.5 rounded-full bg-brand-accent animate-ping"></span>
-                    <span class="text-xs sm:text-sm font-medium text-gray-300"><strong class="text-white">200+ Active Members</strong> Trust Our Services</span>
+        <section class="relative pt-36 pb-24 md:pt-48 md:pb-36 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+                <div class="inline-flex items-center space-x-2 glassmorphism px-4 py-2 rounded-full mb-8 border border-white/10 animate-float">
+                    <span class="flex h-3 w-3 rounded-full bg-brand-accent animate-ping"></span>
+                    <span class="text-xs sm:text-sm font-semibold text-gray-200"><strong class="text-white">200+ Active Members</strong> Trust Our Ecosystem</span>
                 </div>
 
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight mb-6">
-                    Browse Categories & <span class="bg-gradient-to-r from-brand-primary via-indigo-400 to-cyan-400 bg-clip-text text-transparent">Digital Marketplace</span>
+                <h1 class="text-4xl sm:text-6xl lg:text-8xl font-black tracking-tight max-w-5xl mx-auto leading-tight mb-8">
+                    Next-Gen <span class="bg-gradient-to-r from-brand-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">Digital Marketplace</span>
                 </h1>
 
-                <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-                    Explore our curated categories including Minecraft, Discord Ecosystem, Web Development, and Lifetime Subscriptions.
+                <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-normal leading-relaxed">
+                    Explore elite categories including Minecraft gear, automated Discord ecosystems, custom web development, and lifetime subscriptions.
                 </p>
 
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="https://discord.gg" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-brand-primary hover:bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-base transition-all shadow-neon animate-pulse-glow hover:scale-105">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+                    <a href="https://discord.gg" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-brand-primary to-brand-pink hover:opacity-95 text-white px-8 py-4 rounded-2xl font-bold text-base transition-all shadow-neon animate-glow hover:scale-105">
                         <i class="fa-brands fa-discord text-2xl"></i>
                         <span>Join Server Now</span>
                     </a>
-                    <a href="#products" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 glassmorphism-card hover:bg-gray-800 text-white px-8 py-4 rounded-2xl font-semibold text-base transition-all">
+                    <a href="#products" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 glass-card hover:bg-white/5 text-white px-8 py-4 rounded-2xl font-semibold text-base transition-all">
                         <span>Explore Categories</span>
-                        <i class="fa-solid fa-arrow-down text-sm"></i>
+                        <i class="fa-solid fa-arrow-down text-sm text-brand-glow"></i>
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- Categories Section -->
-        <section id="products" class="py-20 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between mb-12">
+        <section id="products" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
                     <div>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold mb-2">Categories</h2>
-                        <p class="text-gray-400 text-sm">Click on any category to view individual inventory and details.</p>
+                        <span class="text-brand-glow font-bold tracking-widest uppercase text-xs">Curated Inventory</span>
+                        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mt-2">Active Categories</h2>
                     </div>
+                    <p class="text-gray-400 text-sm mt-2 md:mt-0">Click any category to open individual inventory page.</p>
                 </div>
 
                 <!-- 4 Selected Categories Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     
                     <!-- 1. Minecraft -->
-                    <div onclick="showSection('minecraft')" class="glassmorphism-card rounded-3xl p-8 flex flex-col justify-between relative group cursor-pointer">
+                    <div onclick="showSection('minecraft')" class="glass-card rounded-3xl p-8 flex flex-col justify-between relative group cursor-pointer overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/30 transition-all"></div>
                         <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl">
+                            <div class="flex items-center justify-between mb-8">
+                                <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-3xl group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-cube"></i>
                                 </div>
-                                <span class="text-xs font-semibold px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">Featured</span>
+                                <span class="text-xs font-bold px-4 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">Featured</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2">Minecraft</h3>
-                            <p class="text-gray-400 text-sm mb-6">Java & Bedrock full-access accounts, Capes, Hypixel ranks, and rare items.</p>
+                            <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">Minecraft</h3>
+                            <p class="text-gray-400 text-sm mb-8 leading-relaxed">Java & Bedrock full-access accounts, Capes, Hypixel ranks, and rare items.</p>
                         </div>
-                        <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="pt-6 border-t border-white/5 flex items-center justify-between">
                             <span class="text-xs text-gray-400">View Products</span>
-                            <span class="bg-brand-primary group-hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Open Page</span>
+                            <span class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md group-hover:shadow-lg">Open Page</span>
                         </div>
                     </div>
 
                     <!-- 2. Discord Items -->
-                    <div onclick="showSection('discord')" class="glassmorphism-card rounded-3xl p-8 flex flex-col justify-between relative group cursor-pointer">
+                    <div onclick="showSection('discord')" class="glass-card rounded-3xl p-8 flex flex-col justify-between relative group cursor-pointer overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-brand-primary/10 rounded-full blur-2xl group-hover:bg-brand-primary/30 transition-all"></div>
                         <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="w-14 h-14 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary text-2xl">
+                            <div class="flex items-center justify-between mb-8">
+                                <div class="w-16 h-16 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-glow text-3xl group-hover:scale-110 transition-transform">
                                     <i class="fa-brands fa-discord"></i>
                                 </div>
-                                <span class="text-xs font-semibold px-3 py-1 bg-brand-primary/10 text-brand-glow border border-brand-primary/20 rounded-full">Automated</span>
+                                <span class="text-xs font-bold px-4 py-1.5 bg-brand-primary/10 text-brand-glow border border-brand-primary/20 rounded-full">Automated</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2">Discord Ecosystem</h3>
-                            <p class="text-gray-400 text-sm mb-6">Discord Nitro, server boosts, aged tokens, and custom bot setups.</p>
+                            <h3 class="text-2xl font-bold mb-3 group-hover:text-brand-glow transition-colors">Discord Ecosystem</h3>
+                            <p class="text-gray-400 text-sm mb-8 leading-relaxed">Discord Nitro, server boosts, aged tokens, and custom bot setups.</p>
                         </div>
-                        <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
-                            <span class="text-xs text-emerald-400 font-semibold">Online Bot</span>
-                            <span class="bg-brand-primary group-hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Open Page</span>
+                        <div class="pt-6 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-xs text-brand-accent font-semibold">Online Bot</span>
+                            <span class="bg-gradient-to-r from-brand-primary to-indigo-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md group-hover:shadow-neon">Open Page</span>
                         </div>
                     </div>
 
                     <!-- 3. Web Development -->
-                    <div onclick="showSection('webdev')" class="glassmorphism-card rounded-3xl p-8 flex flex-col justify-between relative group cursor-pointer">
+                    <div onclick="showSection('webdev')" class="glass-card rounded-3xl p-8 flex flex-col justify-between relative group cursor-pointer overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-brand-cyan/10 rounded-full blur-2xl group-hover:bg-brand-cyan/30 transition-all"></div>
                         <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-2xl">
+                            <div class="flex items-center justify-between mb-8">
+                                <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan text-3xl group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-code"></i>
                                 </div>
-                                <span class="text-xs font-semibold px-3 py-1 bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded-full">Custom Build</span>
+                                <span class="text-xs font-bold px-4 py-1.5 bg-brand-cyan/10 text-cyan-300 border border-brand-cyan/20 rounded-full">Custom Build</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2">Web Development</h3>
-                            <p class="text-gray-400 text-sm mb-6">Custom modern, sleek & responsive websites built by professional developers.</p>
+                            <h3 class="text-2xl font-bold mb-3 group-hover:text-brand-cyan transition-colors">Web Development</h3>
+                            <p class="text-gray-400 text-sm mb-8 leading-relaxed">Custom modern, sleek & responsive websites built by professional developers.</p>
                         </div>
-                        <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="pt-6 border-t border-white/5 flex items-center justify-between">
                             <span class="text-xs text-gray-400">By ZeroCloud</span>
-                            <span class="bg-brand-primary group-hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Open Page</span>
+                            <span class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md group-hover:shadow-neon-cyan">Open Page</span>
                         </div>
                     </div>
 
                     <!-- 4. Lifetime Subscriptions -->
-                    <div onclick="showSection('subscriptions')" class="glassmorphism-card rounded-3xl p-8 flex flex-col justify-between relative group cursor-pointer border-indigo-500/30">
+                    <div onclick="showSection('subscriptions')" class="glass-card rounded-3xl p-8 flex flex-col justify-between relative group cursor-pointer overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/30 transition-all"></div>
                         <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 text-2xl">
+                            <div class="flex items-center justify-between mb-8">
+                                <div class="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-3xl group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-infinity"></i>
                                 </div>
-                                <span class="text-xs font-semibold px-3 py-1 bg-yellow-500/10 text-yellow-300 border border-yellow-500/20 rounded-full">Unlimited</span>
+                                <span class="text-xs font-bold px-4 py-1.5 bg-amber-500/10 text-amber-300 border border-amber-500/20 rounded-full">Unlimited</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2">Lifetime Subscriptions</h3>
-                            <p class="text-gray-400 text-sm mb-6">Netflix, YouTube, Spotify, Disney+, Amazon Prime, Adobe, and Microsoft 365.</p>
+                            <h3 class="text-2xl font-bold mb-3 group-hover:text-amber-400 transition-colors">Lifetime Subscriptions</h3>
+                            <p class="text-gray-400 text-sm mb-8 leading-relaxed">Netflix, YouTube, Spotify, Disney+, Amazon Prime, Adobe, and Microsoft 365.</p>
                         </div>
-                        <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="pt-6 border-t border-white/5 flex items-center justify-between">
                             <span class="text-xs text-brand-accent font-semibold">Warranty Included</span>
-                            <span class="bg-brand-primary group-hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Open Page</span>
+                            <span class="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md group-hover:shadow-lg">Open Page</span>
                         </div>
                     </div>
 
@@ -240,36 +250,37 @@
         </section>
 
         <!-- Why Choose Us / Trust Section -->
-        <section id="why-us" class="py-20 relative bg-dark-800/40 border-y border-gray-800/60">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="why-us" class="py-24 relative bg-dark-800/50 border-y border-white/5">
+            <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-2xl mx-auto mb-16">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Why Trust BLOCKIFY?</h2>
-                    <p class="text-gray-400 text-base">We pride ourselves on reliability, speed, and complete customer satisfaction.</p>
+                    <span class="text-brand-glow font-bold tracking-widest uppercase text-xs">Reliability First</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold mt-2 mb-4">Why Trust BLOCKIFY?</h2>
+                    <p class="text-gray-400 text-base">We pride ourselves on lightning-fast speed, absolute security, and customer satisfaction.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                    <div class="glassmorphism-card p-8 rounded-3xl text-center">
-                        <div class="w-16 h-16 bg-brand-primary/10 border border-brand-primary/20 text-brand-primary rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-neon">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-10 rounded-3xl text-center">
+                        <div class="w-20 h-20 bg-brand-primary/10 border border-brand-primary/20 text-brand-glow rounded-3xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-neon">
                             <i class="fa-solid fa-face-smile"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-2">98% Positive Reviews</h3>
-                        <p class="text-gray-400 text-sm">Over 200 satisfied members vouch for our service quality daily.</p>
+                        <h3 class="text-2xl font-bold mb-3">98% Positive Reviews</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Over 200 satisfied members vouch for our premium service quality daily.</p>
                     </div>
 
-                    <div class="glassmorphism-card p-8 rounded-3xl text-center">
-                        <div class="w-16 h-16 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">
+                    <div class="glass-card p-10 rounded-3xl text-center">
+                        <div class="w-20 h-20 bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan rounded-3xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-neon-cyan">
                             <i class="fa-solid fa-bolt-lightning"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-2">Instant Delivery</h3>
-                        <p class="text-gray-400 text-sm">Automated bots and responsive staff ensure you get your products instantly.</p>
+                        <h3 class="text-2xl font-bold mb-3">Instant Delivery</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Automated bots and responsive staff ensure you get your products instantly.</p>
                     </div>
 
-                    <div class="glassmorphism-card p-8 rounded-3xl text-center">
-                        <div class="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">
+                    <div class="glass-card p-10 rounded-3xl text-center">
+                        <div class="w-20 h-20 bg-brand-pink/10 border border-brand-pink/20 text-brand-pink rounded-3xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-neon-pink">
                             <i class="fa-solid fa-shield-dog"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-2">Zero Scam Policy</h3>
-                        <p class="text-gray-400 text-sm">Secure payment methods, absolute transparency, and active moderation.</p>
+                        <h3 class="text-2xl font-bold mb-3">Zero Scam Policy</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Secure payment methods, absolute transparency, and active moderation.</p>
                     </div>
                 </div>
             </div>
@@ -279,147 +290,151 @@
     <!-- DEDICATED SUBCATEGORY PAGES (Initially Hidden) -->
 
     <!-- 1. Minecraft Page -->
-    <div id="view-minecraft" class="hidden pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <button onclick="showSection('home')" class="mb-8 inline-flex items-center space-x-2 text-sm text-gray-400 hover:text-white glassmorphism px-4 py-2 rounded-xl transition-all">
-            <i class="fa-solid fa-arrow-left"></i>
+    <div id="view-minecraft" class="hidden pt-36 pb-24 max-w-7xl mx-auto px-6">
+        <button onclick="showSection('home')" class="mb-10 inline-flex items-center space-x-2 text-sm text-gray-300 hover:text-white glass-card px-5 py-3 rounded-2xl transition-all hover:scale-105">
+            <i class="fa-solid fa-arrow-left text-brand-glow"></i>
             <span>Back to Home</span>
         </button>
-        <div class="glassmorphism rounded-3xl p-8 mb-12">
-            <div class="flex items-center space-x-4 mb-4">
-                <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-3xl">
+        <div class="glass-card rounded-3xl p-10 mb-12 border-emerald-500/20 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl"></div>
+            <div class="flex items-center space-x-5">
+                <div class="w-20 h-20 rounded-3xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-4xl shadow-lg">
                     <i class="fa-solid fa-cube"></i>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-extrabold">Minecraft Inventory</h1>
-                    <p class="text-gray-400 text-sm">Full access accounts, capes, and ranks with warranty.</p>
+                    <h1 class="text-4xl font-black mb-2">Minecraft Inventory</h1>
+                    <p class="text-gray-400 text-base">Full access accounts, capes, and ranks with full warranty guarantee.</p>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glassmorphism-card p-6 rounded-2xl">
-                <h3 class="font-bold text-xl mb-2">Java Full Access Account</h3>
-                <p class="text-gray-400 text-sm mb-4">Unmigrated / Full email access with change options.</p>
-                <div class="flex items-center justify-between"><span class="text-brand-accent font-bold">$4.99</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-semibold">Buy via Discord</a></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-3xl group">
+                <h3 class="font-bold text-2xl mb-3 group-hover:text-emerald-400 transition-colors">Java Full Access Account</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Unmigrated / Full email access with change options enabled.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-white/5"><span class="text-emerald-400 font-extrabold text-lg">$4.99</span><a href="https://discord.gg" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md">Buy via Discord</a></div>
             </div>
-            <div class="glassmorphism-card p-6 rounded-2xl">
-                <h3 class="font-bold text-xl mb-2">Hypixel VIP+ Rank</h3>
-                <p class="text-gray-400 text-sm mb-4">Gifted securely directly to your main username.</p>
-                <div class="flex items-center justify-between"><span class="text-brand-accent font-bold">$9.99</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-semibold">Buy via Discord</a></div>
+            <div class="glass-card p-8 rounded-3xl group">
+                <h3 class="font-bold text-2xl mb-3 group-hover:text-emerald-400 transition-colors">Hypixel VIP+ Rank</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Gifted securely directly to your main username within minutes.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-white/5"><span class="text-emerald-400 font-extrabold text-lg">$9.99</span><a href="https://discord.gg" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md">Buy via Discord</a></div>
             </div>
         </div>
     </div>
 
     <!-- 2. Discord Ecosystem Page -->
-    <div id="view-discord" class="hidden pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <button onclick="showSection('home')" class="mb-8 inline-flex items-center space-x-2 text-sm text-gray-400 hover:text-white glassmorphism px-4 py-2 rounded-xl transition-all">
-            <i class="fa-solid fa-arrow-left"></i>
+    <div id="view-discord" class="hidden pt-36 pb-24 max-w-7xl mx-auto px-6">
+        <button onclick="showSection('home')" class="mb-10 inline-flex items-center space-x-2 text-sm text-gray-300 hover:text-white glass-card px-5 py-3 rounded-2xl transition-all hover:scale-105">
+            <i class="fa-solid fa-arrow-left text-brand-glow"></i>
             <span>Back to Home</span>
         </button>
-        <div class="glassmorphism rounded-3xl p-8 mb-12">
-            <div class="flex items-center space-x-4 mb-4">
-                <div class="w-16 h-16 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary text-3xl">
+        <div class="glass-card rounded-3xl p-10 mb-12 border-brand-primary/20 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-primary/10 rounded-full blur-3xl"></div>
+            <div class="flex items-center space-x-5">
+                <div class="w-20 h-20 rounded-3xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-glow text-4xl shadow-neon">
                     <i class="fa-brands fa-discord"></i>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-extrabold">Discord Ecosystem</h1>
-                    <p class="text-gray-400 text-sm">Nitro upgrades, server boosts, and automated bot setups.</p>
+                    <h1 class="text-4xl font-black mb-2">Discord Ecosystem</h1>
+                    <p class="text-gray-400 text-base">Nitro upgrades, server boosts, and automated bot setups.</p>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glassmorphism-card p-6 rounded-2xl">
-                <h3 class="font-bold text-xl mb-2">Discord Nitro (1 Year)</h3>
-                <p class="text-gray-400 text-sm mb-4">Gift link delivery handled securely within seconds.</p>
-                <div class="flex items-center justify-between"><span class="text-brand-accent font-bold">$39.99</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-semibold">Buy via Discord</a></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-3xl group">
+                <h3 class="font-bold text-2xl mb-3 group-hover:text-brand-glow transition-colors">Discord Nitro (1 Year)</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Gift link delivery handled securely within seconds.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-white/5"><span class="text-brand-glow font-extrabold text-lg">$39.99</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-neon">Buy via Discord</a></div>
             </div>
-            <div class="glassmorphism-card p-6 rounded-2xl">
-                <h3 class="font-bold text-xl mb-2">Server Boosts (14 Boosts)</h3>
-                <p class="text-gray-400 text-sm mb-4">Level 3 server boosts with 30 days warranty.</p>
-                <div class="flex items-center justify-between"><span class="text-brand-accent font-bold">$7.99</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-semibold">Buy via Discord</a></div>
+            <div class="glass-card p-8 rounded-3xl group">
+                <h3 class="font-bold text-2xl mb-3 group-hover:text-brand-glow transition-colors">Server Boosts (14 Boosts)</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Level 3 server boosts with 30 days active warranty.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-white/5"><span class="text-brand-glow font-extrabold text-lg">$7.99</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-neon">Buy via Discord</a></div>
             </div>
         </div>
     </div>
 
     <!-- 3. Web Development Page -->
-    <div id="view-webdev" class="hidden pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <button onclick="showSection('home')" class="mb-8 inline-flex items-center space-x-2 text-sm text-gray-400 hover:text-white glassmorphism px-4 py-2 rounded-xl transition-all">
-            <i class="fa-solid fa-arrow-left"></i>
+    <div id="view-webdev" class="hidden pt-36 pb-24 max-w-7xl mx-auto px-6">
+        <button onclick="showSection('home')" class="mb-10 inline-flex items-center space-x-2 text-sm text-gray-300 hover:text-white glass-card px-5 py-3 rounded-2xl transition-all hover:scale-105">
+            <i class="fa-solid fa-arrow-left text-brand-glow"></i>
             <span>Back to Home</span>
         </button>
-        <div class="glassmorphism rounded-3xl p-8 mb-12">
-            <div class="flex items-center space-x-4 mb-4">
-                <div class="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-3xl">
+        <div class="glass-card rounded-3xl p-10 mb-12 border-brand-cyan/20 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-cyan/10 rounded-full blur-3xl"></div>
+            <div class="flex items-center space-x-5">
+                <div class="w-20 h-20 rounded-3xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan text-4xl shadow-neon-cyan">
                     <i class="fa-solid fa-code"></i>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-extrabold">Web Development by ZeroCloud</h1>
-                    <p class="text-gray-400 text-sm">Professional, responsive, and custom coded websites.</p>
+                    <h1 class="text-4xl font-black mb-2">Web Development by ZeroCloud</h1>
+                    <p class="text-gray-400 text-base">Professional, responsive, and custom coded modern websites.</p>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glassmorphism-card p-6 rounded-2xl">
-                <h3 class="font-bold text-xl mb-2">Custom Landing Page</h3>
-                <p class="text-gray-400 text-sm mb-4">Tailwind CSS responsive design with modern glassmorphism UI.</p>
-                <div class="flex items-center justify-between"><span class="text-brand-accent font-bold">Custom Quote</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-semibold">Contact Dev</a></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-3xl group">
+                <h3 class="font-bold text-2xl mb-3 group-hover:text-brand-cyan transition-colors">Custom Landing Page</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Tailwind CSS responsive design with modern glassmorphism UI & animations.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-white/5"><span class="text-brand-cyan font-extrabold text-lg">Custom Quote</span><a href="https://discord.gg" target="_blank" class="bg-cyan-600 hover:bg-cyan-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md">Contact Dev</a></div>
             </div>
         </div>
     </div>
 
     <!-- 4. Lifetime Subscriptions Page -->
-    <div id="view-subscriptions" class="hidden pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <button onclick="showSection('home')" class="mb-8 inline-flex items-center space-x-2 text-sm text-gray-400 hover:text-white glassmorphism px-4 py-2 rounded-xl transition-all">
-            <i class="fa-solid fa-arrow-left"></i>
+    <div id="view-subscriptions" class="hidden pt-36 pb-24 max-w-7xl mx-auto px-6">
+        <button onclick="showSection('home')" class="mb-10 inline-flex items-center space-x-2 text-sm text-gray-300 hover:text-white glass-card px-5 py-3 rounded-2xl transition-all hover:scale-105">
+            <i class="fa-solid fa-arrow-left text-brand-glow"></i>
             <span>Back to Home</span>
         </button>
-        <div class="glassmorphism rounded-3xl p-8 mb-12">
-            <div class="flex items-center space-x-4 mb-4">
-                <div class="w-16 h-16 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 text-3xl">
+        <div class="glass-card rounded-3xl p-10 mb-12 border-amber-500/20 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl"></div>
+            <div class="flex items-center space-x-5">
+                <div class="w-20 h-20 rounded-3xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-4xl shadow-lg">
                     <i class="fa-solid fa-infinity"></i>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-extrabold">Lifetime Subscriptions</h1>
-                    <p class="text-gray-400 text-sm">Streaming accounts and premium utility passes.</p>
+                    <h1 class="text-4xl font-black mb-2">Lifetime Subscriptions</h1>
+                    <p class="text-gray-400 text-base">Streaming accounts and premium utility passes with warranty.</p>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glassmorphism-card p-6 rounded-2xl">
-                <h3 class="font-bold text-xl mb-2">Netflix UHD Lifetime Profile</h3>
-                <p class="text-gray-400 text-sm mb-4">Private profile with full warranty guarantee.</p>
-                <div class="flex items-center justify-between"><span class="text-brand-accent font-bold">$3.99</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-semibold">Buy via Discord</a></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-3xl group">
+                <h3 class="font-bold text-2xl mb-3 group-hover:text-amber-400 transition-colors">Netflix UHD Lifetime Profile</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Private profile with full warranty guarantee and 4K ultra HD support.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-white/5"><span class="text-amber-400 font-extrabold text-lg">$3.99</span><a href="https://discord.gg" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md">Buy via Discord</a></div>
             </div>
-            <div class="glassmorphism-card p-6 rounded-2xl">
-                <h3 class="font-bold text-xl mb-2">Spotify Premium (1 Year)</h3>
-                <p class="text-gray-400 text-sm mb-4">Upgrade on your own personal account safely.</p>
-                <div class="flex items-center justify-between"><span class="text-brand-accent font-bold">$5.99</span><a href="https://discord.gg" target="_blank" class="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-semibold">Buy via Discord</a></div>
+            <div class="glass-card p-8 rounded-3xl group">
+                <h3 class="font-bold text-2xl mb-3 group-hover:text-amber-400 transition-colors">Spotify Premium (1 Year)</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Upgrade securely on your own personal account safely.</p>
+                <div class="flex items-center justify-between pt-4 border-t border-white/5"><span class="text-amber-400 font-extrabold text-lg">$5.99</span><a href="https://discord.gg" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md">Buy via Discord</a></div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="glassmorphism border-t border-gray-800 py-12 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer class="glassmorphism border-t border-white/5 py-12 mt-24">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-lg bg-brand-primary flex items-center justify-center text-white">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-primary to-brand-cyan flex items-center justify-center text-white shadow-neon">
                     <i class="fa-solid fa-cube text-sm"></i>
                 </div>
-                <span class="text-lg font-bold tracking-wider text-white">BLOCKIFY</span>
+                <span class="text-base font-bold tracking-wider text-white">BLOCKIFY</span>
             </div>
 
             <p class="text-xs text-gray-500 text-center md:text-left">
-                &copy; 2026 BLOCKIFY Marketplace. All rights reserved.
+                &copy; 2026 BLOCKIFY Marketplace. All rights reserved. Built for elite performance.
             </p>
 
             <div class="flex items-center space-x-4">
-                <a href="https://discord.gg" target="_blank" class="w-10 h-10 rounded-xl bg-dark-800 border border-gray-700 flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary hover:border-brand-primary transition-all">
+                <a href="https://discord.gg" target="_blank" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-white hover:border-brand-primary transition-all">
                     <i class="fa-brands fa-discord"></i>
                 </a>
             </div>
         </div>
     </footer>
 
-    <!-- Interactive JavaScript for Single Page Navigation & Menu -->
+    <!-- Interactive JavaScript -->
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -428,7 +443,6 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Function to switch views dynamically without page reload
         function showSection(sectionId) {
             const views = ['home', 'minecraft', 'discord', 'webdev', 'subscriptions'];
             views.forEach(v => {
