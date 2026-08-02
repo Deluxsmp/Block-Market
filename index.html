@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOCKIFY - Premium Digital Marketplace</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0b0f19',
+                            800: '#111827',
+                            700: '#1f2937',
+                        },
+                        brand: {
+                            primary: '#5865F2',
+                            glow: '#7289da',
+                            accent: '#10B981'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 25px rgba(88, 101, 242, 0.4)',
+                        'neon-hover': '0 0 35px rgba(88, 101, 242, 0.7)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+        }
+        .glassmorphism {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glassmorphism-card {
+            background: rgba(31, 41, 55, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glassmorphism-card:hover {
+            border-color: rgba(88, 101, 242, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(88, 101, 242, 0.3);
+        }
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(88, 101, 242, 0.8);
+            }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 2.5s infinite;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-100 antialiased selection:bg-brand-primary selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glassmorphism border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-brand-primary flex items-center justify-center shadow-neon group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-cube text-white text-xl"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-white via-indigo-200 to-brand-primary bg-clip-text text-transparent">
+                    BLOCKIFY
+                </span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#products" class="text-gray-300 hover:text-brand-primary transition-colors">Products</a>
+                <a href="#why-us" class="text-gray-300 hover:text-brand-primary transition-colors">Reviews & Trust</a>
+                <a href="#about" class="text-gray-300 hover:text-brand-primary transition-colors">About</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="flex items-center space-x-4">
+                <a href="https://discord.gg" target="_blank" class="hidden sm:inline-flex items-center space-x-2 bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-neon animate-pulse-glow">
+                    <i class="fa-brands fa-discord text-lg"></i>
+                    <span>Join Discord</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glassmorphism border-t border-gray-800 px-4 pt-4 pb-6 space-y-3">
+            <a href="#products" class="block text-gray-300 hover:text-brand-primary font-medium py-2">Products</a>
+            <a href="#why-us" class="block text-gray-300 hover:text-brand-primary font-medium py-2">Reviews & Trust</a>
+            <a href="#about" class="block text-gray-300 hover:text-brand-primary font-medium py-2">About</a>
+            <a href="https://discord.gg" target="_blank" class="flex items-center justify-center space-x-2 w-full bg-brand-primary text-white py-3 rounded-xl font-semibold shadow-neon">
+                <i class="fa-brands fa-discord text-lg"></i>
+                <span>Join Discord</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <!-- Glow background accents -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- Badge -->
+            <div class="inline-flex items-center space-x-2 bg-dark-800/80 border border-gray-700/60 px-4 py-2 rounded-full mb-8 shadow-inner">
+                <span class="flex h-2.5 w-2.5 rounded-full bg-brand-accent animate-ping"></span>
+                <span class="text-xs sm:text-sm font-medium text-gray-300"><strong class="text-white">200+ Active Members</strong> Trust Our Services</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight mb-6">
+                Instant & Trusted Digital Services on <span class="bg-gradient-to-r from-brand-primary via-indigo-400 to-cyan-400 bg-clip-text text-transparent">Discord</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+                Get premium subscriptions, gaming keys, and digital assets instantly with zero hassle. Fully automated delivery, 98% positive reviews, and guaranteed security.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://discord.gg" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-brand-primary hover:bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-base transition-all shadow-neon animate-pulse-glow hover:scale-105">
+                    <i class="fa-brands fa-discord text-2xl"></i>
+                    <span>Join Server Now</span>
+                </a>
+                <a href="#products" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 glassmorphism-card hover:bg-gray-800 text-white px-8 py-4 rounded-2xl font-semibold text-base transition-all">
+                    <span>Explore Products</span>
+                    <i class="fa-solid fa-arrow-down text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Featured Digital Assets</h2>
+                <p class="text-gray-400 text-base">Explore our high-demand products available for instant automated delivery inside our Discord marketplace.</p>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Product Card: Netflix -->
+                <div class="glassmorphism-card rounded-3xl p-6 flex flex-col justify-between relative group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 text-2xl">
+                                <i class="fa-solid fa-tv"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 bg-red-500/10 text-red-400 border border-red-500/20 rounded-full">Streaming</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Netflix Premium</h3>
+                        <p class="text-gray-400 text-sm mb-6">Ultra HD 4K streaming account with private profile, full warranty, and instant delivery.</p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>4K Ultra HD Quality</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Instant Automated Delivery</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Full Warranty Replacement</span></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Starting from</span>
+                            <span class="text-xl font-extrabold text-white">$3.99</span>
+                        </div>
+                        <a href="https://discord.gg" target="_blank" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Buy on Discord</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: Amazon Prime Video -->
+                <div class="glassmorphism-card rounded-3xl p-6 flex flex-col justify-between relative group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 rounded-full">Streaming</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Amazon Prime Video</h3>
+                        <p class="text-gray-400 text-sm mb-6">Full access account to enjoy top-tier movies, series, and Amazon Originals in crisp quality.</p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Private / Shared Options</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Instant Delivery 24/7</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Guaranteed Stability</span></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Starting from</span>
+                            <span class="text-xl font-extrabold text-white">$2.49</span>
+                        </div>
+                        <a href="https://discord.gg" target="_blank" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Buy on Discord</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: Minecraft Capes -->
+                <div class="glassmorphism-card rounded-3xl p-6 flex flex-col justify-between relative group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 text-2xl">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full">Gaming</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Minecraft Capes</h3>
+                        <p class="text-gray-400 text-sm mb-6">Migrated and rare optifine/special event Minecraft capes to make your skin stand out.</p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Rare & Exclusive Styles</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Safe Link to Account</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Instant Code Delivery</span></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Starting from</span>
+                            <span class="text-xl font-extrabold text-white">$4.99</span>
+                        </div>
+                        <a href="https://discord.gg" target="_blank" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Buy on Discord</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: Minecraft Java & PE -->
+                <div class="glassmorphism-card rounded-3xl p-6 flex flex-col justify-between relative group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 text-2xl">
+                                <i class="fa-solid fa-cubes"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">Gaming</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Minecraft Java & PE</h3>
+                        <p class="text-gray-400 text-sm mb-6">Full access working accounts or keys for Minecraft Java & Bedrock / Pocket Edition.</p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Full Access (Change Skin/Name)</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>PC & Mobile Compatible</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Lifetime Guarantee</span></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Starting from</span>
+                            <span class="text-xl font-extrabold text-white">$5.99</span>
+                        </div>
+                        <a href="https://discord.gg" target="_blank" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Buy on Discord</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: Discord Nitro -->
+                <div class="glassmorphism-card rounded-3xl p-6 flex flex-col justify-between relative group">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary text-2xl">
+                                <i class="fa-brands fa-discord"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 bg-brand-primary/10 text-brand-glow border border-brand-primary/20 rounded-full">Discord</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Discord Nitro</h3>
+                        <p class="text-gray-400 text-sm mb-6">Gift links or direct login methods for cheap Discord Nitro with 2 Boosts included.</p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Includes 2 Server Boosts</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Gift Link or Login Option</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Instant Automated Delivery</span></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Starting from</span>
+                            <span class="text-xl font-extrabold text-white">$2.99</span>
+                        </div>
+                        <a href="https://discord.gg" target="_blank" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Buy on Discord</a>
+                    </div>
+                </div>
+
+                <!-- Product Card: Custom Bundles -->
+                <div class="glassmorphism-card rounded-3xl p-6 flex flex-col justify-between relative group border-indigo-500/30">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-2xl">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded-full">Custom</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Custom Bundles</h3>
+                        <p class="text-gray-400 text-sm mb-6">Need a specific combo of streaming services and gaming keys? Create a custom ticket.</p>
+                        <ul class="space-y-2.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Tailored Combo Pricing</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Dedicated Support Ticket</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-accent text-xs"></i><span>Bulk Discounts Available</span></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Pricing</span>
+                            <span class="text-xl font-extrabold text-white">Negotiable</span>
+                        </div>
+                        <a href="https://discord.gg" target="_blank" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md group-hover:shadow-neon">Open Ticket</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Trust Section -->
+    <section id="why-us" class="py-20 relative bg-dark-800/40 border-y border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Why Trust BLOCKIFY?</h2>
+                <p class="text-gray-400 text-base">We pride ourselves on reliability, speed, and complete customer satisfaction.</p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Trust Card 1 -->
+                <div class="glassmorphism-card p-8 rounded-3xl text-center">
+                    <div class="w-16 h-16 bg-brand-primary/10 border border-brand-primary/20 text-brand-primary rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-neon">
+                        <i class="fa-solid fa-face-smile"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">98% Positive Reviews</h3>
+                    <p class="text-gray-400 text-sm">Our community speaks for itself. Over 200 satisfied members vouch for our service quality daily.</p>
+                </div>
+
+                <!-- Trust Card 2 -->
+                <div class="glassmorphism-card p-8 rounded-3xl text-center">
+                    <div class="w-16 h-16 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Instant Delivery</h3>
+                    <p class="text-gray-400 text-sm">No waiting around. Automated bots and responsive staff ensure you get your products within seconds.</p>
+                </div>
+
+                <!-- Trust Card 3 -->
+                <div class="glassmorphism-card p-8 rounded-3xl text-center">
+                    <div class="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6">
+                        <i class="fa-solid fa-shield-dog"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Zero Scam Policy</h3>
+                    <p class="text-gray-400 text-sm">Secure payment methods, absolute transparency, and active moderation guarantee zero fraud.</p>
+                </div>
+            </div>
+
+            <!-- Testimonial / Review Banner -->
+            <div class="glassmorphism rounded-3xl p-8 sm:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="space-y-4 max-w-xl">
+                    <div class="flex items-center space-x-1 text-amber-400 text-sm">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span class="text-white font-bold ml-2">4.9 / 5.0 Average Rating</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-bold">Ready to experience seamless transactions?</h3>
+                    <p class="text-gray-400 text-sm">Join our growing Discord server today to view live customer vouches and grab your favorite digital products instantly.</p>
+                </div>
+                <div>
+                    <a href="https://discord.gg" target="_blank" class="inline-flex items-center space-x-3 bg-brand-primary hover:bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-neon animate-pulse-glow">
+                        <i class="fa-brands fa-discord text-2xl"></i>
+                        <span>Join 200+ Members</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-6">About BLOCKIFY</h2>
+            <p class="text-gray-400 text-base leading-relaxed mb-6">
+                BLOCKIFY was built with a single goal in mind: to provide a secure, fast, and friendly environment for gamers and streaming enthusiasts to acquire digital goods without getting scammed. With over 200 active members and continuous positive feedback, we strive to maintain top-tier service standards.
+            </p>
+            <div class="flex items-center justify-center space-x-6 text-gray-400 text-sm">
+                <div class="flex items-center space-x-2"><i class="fa-solid fa-users text-brand-primary"></i><span>200+ Members</span></div>
+                <div class="flex items-center space-x-2"><i class="fa-solid fa-circle-check text-brand-accent"></i><span>98% Satisfaction</span></div>
+                <div class="flex items-center space-x-2"><i class="fa-solid fa-clock text-cyan-400"></i><span>24/7 Support</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glassmorphism border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Brand Info -->
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary flex items-center justify-center text-white">
+                    <i class="fa-solid fa-cube text-sm"></i>
+                </div>
+                <span class="text-lg font-bold tracking-wider text-white">BLOCKIFY</span>
+            </div>
+
+            <!-- Copyright -->
+            <p class="text-xs text-gray-500 text-center md:text-left">
+                &copy; 2026 BLOCKIFY Marketplace. All rights reserved. Not affiliated with Netflix, Amazon, or Mojang.
+            </p>
+
+            <!-- Social Links -->
+            <div class="flex items-center space-x-4">
+                <a href="https://discord.gg" target="_blank" class="w-10 h-10 rounded-xl bg-dark-800 border border-gray-700 flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary hover:border-brand-primary transition-all">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-xl bg-dark-800 border border-gray-700 flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary hover:border-brand-primary transition-all">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-xl bg-dark-800 border border-gray-700 flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary hover:border-brand-primary transition-all">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking nav links
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
