@@ -1,0 +1,13 @@
+{
+  "name": "free-ai-clip-generator",
+  "version": "1.0.0",
+  "description": "Create 2-3 minute video clips from uploaded videos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  }
+}
