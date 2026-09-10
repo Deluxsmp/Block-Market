@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ClipForge — Video Clip Generator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #18224a, transparent 45%),
+        #070914;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: min(950px, 92%);
+      margin: auto;
+      padding: 70px 0;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #303b67;
+      border-radius: 999px;
+      color: #9faefc;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 7vw, 72px);
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: #7387ff;
+    }
+
+    .hero p {
+      color: #9ca3b8;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    .card {
+      background: rgba(15, 20, 38, .88);
+      border: 1px solid #242c49;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.35);
+    }
+
+    .upload {
+      border: 2px dashed #343e63;
+      border-radius: 18px;
+      padding: 45px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .upload:hover {
+      border-color: #7183ff;
+      background: rgba(113,131,255,.05);
+    }
+
+    .upload input {
+      display: none;
+    }
+
+    .upload-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .upload h2 {
+      margin-bottom: 8px;
+    }
+
+    .upload p {
+      color: #858da5;
+      font-size: 14px;
+    }
+
+    .filename {
+      margin-top: 15px;
+      color: #8ea0ff;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 16px;
+      border: 0;
+      border-radius: 14px;
+      background: #6477ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5266ef;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 20px;
+      color: #9ca3b8;
+      display: none;
+    }
+
+    .results {
+      margin-top: 35px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .clip {
+      background: #0c1122;
+      border: 1px solid #252d48;
+      padding: 18px;
+      border-radius: 18px;
+    }
+
+    .clip h3 {
+      margin-bottom: 12px;
+    }
+
+    video {
+      width: 100%;
+      max-height: 420px;
+      border-radius: 12px;
+      background: black;
+    }
+
+    .download {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 12px;
+      padding: 13px;
+      border-radius: 12px;
+      background: #20294a;
+      color: white;
+    }
+
+    .download:hover {
+      background: #2c3862;
+    }
+
+    .note {
+      margin-top: 20px;
+      color: #737c96;
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="badge">FREE VIDEO CLIP GENERATOR</div>
+
+    <h1>
+      Turn Videos Into<br>
+      <span>Short Clips.</span>
+    </h1>
+
+    <p>
+      Upload your own video and automatically create
+      2–3 minute clips ready for preview and download.
+    </p>
+  </div>
+
+  <div class="card">
+
+    <label class="upload">
+      <input
+        type="file"
+        id="videoInput"
+        accept="video/*"
+      >
+
+      <div class="upload-icon">🎬</div>
+
+      <h2>Select a Video</h2>
+
+      <p>
+        Upload a video you own or have permission to use
+      </p>
+    </label>
+
+    <div class="filename" id="filename"></div>
+
+    <button id="generateBtn" disabled>
+      Generate Clips
+    </button>
+
+    <div class="status" id="status">
+      Processing your video...
+    </div>
+
+    <div class="results" id="results"></div>
+
+    <div class="note">
+      Only upload videos that you own or have permission to edit.
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  const input = document.getElementById("videoInput");
+  const filename = document.getElementById("filename");
+  const button = document.getElementById("generateBtn");
+  const status = document.getElementById("status");
+  const results = document.getElementById("results");
+
+  let selectedFile = null;
+
+  input.addEventListener("change", () => {
+    selectedFile = input.files[0];
+
+    if (!selectedFile) {
+      button.disabled = true;
+      filename.textContent = "";
+      return;
+    }
+
+    filename.textContent = selectedFile.name;
+    button.disabled = false;
+  });
+
+  button.addEventListener("click", async () => {
+
+    if (!selectedFile) return;
+
+    button.disabled = true;
+    status.style.display = "block";
+    status.textContent = "Creating your 2–3 minute clips...";
+    results.innerHTML = "";
+
+    const formData = new FormData();
+    formData.append("video", selectedFile);
+
+    try {
+
+      const response = await fetch("/api/create-clips", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      status.textContent = "Clips created successfully!";
+
+      data.clips.forEach((clip, index) => {
+
+        const div = document.createElement("div");
+        div.className = "clip";
+
+        div.innerHTML = `
+          <h3>Clip ${index + 1}</h3>
+
+          <video
+            controls
+            preload="metadata"
+            src="${clip.url}">
+          </video>
+
+          <a
+            class="download"
+            href="${clip.url}"
+            download>
+            Download Clip
+          </a>
+        `;
+
+        results.appendChild(div);
+      });
+
+    } catch (error) {
+
+      status.textContent = error.message;
+
+    } finally {
+
+      button.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
