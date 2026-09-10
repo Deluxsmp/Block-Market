@@ -1,7 +1,7 @@
 {
-  "name": "free-ai-clip-generator",
+  "name": "clipforge",
   "version": "1.0.0",
-  "description": "Create 2-3 minute video clips from uploaded videos",
+  "description": "Video clip generator for videos you own or are authorized to edit",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
